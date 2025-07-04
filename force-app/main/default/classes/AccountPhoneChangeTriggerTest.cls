@@ -6,7 +6,7 @@ private class AccountPhoneChangeTriggerTest {
         insert acc;
 
         // Cambiar número de teléfono. to ingles: Testing change of phone number
-        Test.startTest();
+        Test.startTest(); // Start test context
         acc.Phone = '7891011'; // New phone number
         update acc; // Update the account to trigger the phone change
 
