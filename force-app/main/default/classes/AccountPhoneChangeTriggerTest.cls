@@ -7,8 +7,8 @@ private class AccountPhoneChangeTriggerTest {
 
         // Cambiar número de teléfono. to ingles: Testing change of phone number
         Test.startTest();
-        acc.Phone = '7891011';
-        update acc;
+        acc.Phone = '7891011'; // New phone number
+        update acc; // Update the account to trigger the phone change
 
         // Validar que se haya creado el registro en PhoneChange__c object. to ingles: Testing validation of PhoneChange__c record creation
         List<PhoneChange__c> changes = [
