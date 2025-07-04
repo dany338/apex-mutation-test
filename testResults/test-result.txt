@@ -1,0 +1,22 @@
+=== Test Results
+TEST NAME                                            OUTCOME  MESSAGE  RUNTIME (MS)
+───────────────────────────────────────────────────  ───────  ───────  ────────────
+AccountPhoneChangeTriggerTest.testPhoneChangeInsert  Pass              849         
+
+
+
+
+=== Test Summary
+NAME                 VALUE                    
+───────────────────  ─────────────────────────
+Outcome              Passed                   
+Tests Ran            1                        
+Pass Rate            100%                     
+Fail Rate            0%                       
+Skip Rate            0%                       
+Test Run Id          707gK000007p0qG          
+Test Setup Time      0 ms                     
+Test Execution Time  849 ms                   
+Test Total Time      849 ms                   
+Org Id               00DgK000001suJEUAY       
+Username             dany338919@agentforce.com
