@@ -2,22 +2,20 @@
 private class ProductInvocableActionTest {
 
     @isTest
-    static void testGenerateAdditionalInformation() {
-        // Crear un input de prueba
-        ProductInvocableAction.inputVar testInput = new ProductInvocableAction.inputVar();
-        testInput.productName = 'TestProduct';
-        testInput.varIdRecord = '001XXXXXXXXXXXXXXX';
+    static void testGenerateAditionalInformation() {
+        ProductInvocableAction.inputVar input = new ProductInvocableAction.inputVar();
+        input.productName = 'Producto de prueba';
+        input.varIdRecord = '001XXXXXXXXXXXXXXX';
 
-        // Ejecutar el método invocable con el input
-        List<ProductInvocableAction.inputVar> inputs = new List<ProductInvocableAction.inputVar>{ testInput };
-        List<ProductInvocableAction.outputVar> results = ProductInvocableAction.generateAdditionalInformation(inputs);
+        List<ProductInvocableAction.inputVar> inputs = new List<ProductInvocableAction.inputVar>{ input };
+        List<ProductInvocableAction.outputVar> result = ProductInvocableAction.generateAditionalInformation(inputs);
 
-        // Validaciones
-        System.assertNotEquals(null, results, 'Los resultados no deben ser nulos');
-        System.assertEquals(1, results.size(), 'Debe haber un solo resultado');
-        System.assertNotEquals(null, results[0].aditionalInformation, 'La información adicional no debe ser nula');
-        System.assertEquals(1, results[0].aditionalInformation.size(), 'Debe haber un ContextDataInput');
-        System.assertEquals(Constants.OBJECT_QUOTE, results[0].aditionalInformation[0].nodeName, 'El nodeName debe ser OBJECT_QUOTE');
-        System.assert(results[0].aditionalInformation[0].nodeData.containsKey(Constants.STRING_ID_idRecord), 'Debe contener el ID en nodeData');
+        System.assertNotEquals(null, result, 'Resultado no debe ser null');
+        System.assertEquals(1, result.size(), 'Debe haber un solo resultado');
+
+        DummyContextDataInput info = result[0].aditionalInformation[0];
+        System.assertEquals(Constants.OBJECT_QUOTE, info.nodeName);
+        System.assert(info.nodeData.containsKey(Constants.STRING_ID), 'Debe contener el ID');
+        System.assertEquals('001XXXXXXXXXXXXXXX', String.valueOf(info.nodeData.get(Constants.STRING_ID)));
     }
 }

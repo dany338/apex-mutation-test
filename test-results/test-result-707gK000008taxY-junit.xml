@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="force.apex" timestamp="2025-07-15T23:56:30.000Z" hostname="https://orgfarm-7d18613451-dev-ed.develop.my.salesforce.com" tests="0" failures="0"  errors="0"  time="0.00">
+        <properties>
+            <property name="outcome" value="Skipped"/>
+            <property name="testsRan" value="0"/>
+            <property name="passing" value="0"/>
+            <property name="failing" value="0"/>
+            <property name="skipped" value="0"/>
+            <property name="passRate" value="0%"/>
+            <property name="failRate" value="0%"/>
+            <property name="testStartTime" value="Tue Jul 15 2025 6:56:30 PM"/>
+            <property name="testSetupTimeInMs" value="0"/>
+            <property name="testExecutionTime" value="0.00 s"/>
+            <property name="testTotalTime" value="0.00 s"/>
+            <property name="commandTime" value="0.61 s"/>
+            <property name="hostname" value="https://orgfarm-7d18613451-dev-ed.develop.my.salesforce.com"/>
+            <property name="orgId" value="00DgK000001suJEUAY"/>
+            <property name="username" value="dany338919@agentforce.com"/>
+            <property name="testRunId" value="707gK000008taxY"/>
+            <property name="userId" value="005gK000001VTlBQAW"/>
+        </properties>
+    </testsuite>
+</testsuites>

@@ -4,44 +4,41 @@
 **/
 public with sharing class ProductInvocableAction {
     
-    // Constructor method
+    // Clase de entrada
     public class inputVar {
         @InvocableVariable(required=true)
         public String productName;
         
         @InvocableVariable(required=true)
         public String varIdRecord;
-        
     }
     
-    // variables de salida
+    // Clase de salida
     public class outputVar {
         @InvocableVariable
-        public runtime_industries_cpq.ContextDataInput[] aditionalInformation;
+        public DummyContextDataInput[] aditionalInformation;
     }
 
-    //invocable method
-    @InvocableMethod(label='Test method invocable' description='this is a invocable methond for flows')
+    // Método invocable para Flows
+    @InvocableMethod(label='Test method invocable' description='This is an invocable method for flows')
     public static List<outputVar> generateAditionalInformation(List<inputVar> inputs) {
         String apiVar;
         String idRecord;
-        String typeVar;
         outputVar output = new outputVar();
-        
-        
-        for(inputVar input : inputs ){
+
+        for(inputVar input : inputs) {
             apiVar = input.productName;
             idRecord = input.varIdRecord;
         }
 
-        List<runtime_industries_cpq.ContextDataInput> resultData = new List<runtime_industries_cpq.ContextDataInput>();
-        runtime_industries_cpq.ContextDataInput ouputContextData = new runtime_industries_cpq.ContextDataInput();
-        ouputContextData.nodeName = Constants.OBJECT_QUOTE; 
-        ouputContextData.nodeData = new Map<String,Object>();
-        ouputContextData.nodeData.put(Constants.STRING_ID,idRecord);
-        resultData.add(ouputContextData);
-        
+        List<DummyContextDataInput> resultData = new List<DummyContextDataInput>();
+        DummyContextDataInput outputContextData = new DummyContextDataInput();
+        outputContextData.nodeName = Constants.OBJECT_QUOTE;
+        outputContextData.nodeData = new Map<String, Object>();
+        outputContextData.nodeData.put(Constants.STRING_ID, idRecord);
+        resultData.add(outputContextData);
+
         output.aditionalInformation = resultData;
-        return new List<outputVar>{output};
+        return new List<outputVar>{ output };
     }
 }
