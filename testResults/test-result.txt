@@ -1,7 +1,8 @@
 === Test Results
-TEST NAME                                            OUTCOME  MESSAGE  RUNTIME (MS)
-───────────────────────────────────────────────────  ───────  ───────  ────────────
-AccountPhoneChangeTriggerTest.testPhoneChangeInsert  Pass              849         
+TEST NAME                                                    OUTCOME  MESSAGE                                                                                         RUNTIME (MS)
+───────────────────────────────────────────────────────────  ───────  ──────────────────────────────────────────────────────────────────────────────────────────────  ────────────
+ProductInvocableActionTest.testGenerateAditionalInformation  Fail     System.AssertException: Assertion Failed: Debe haber un solo resultado: Expected: 1, Actual: 0  
+                                                                      Class.ProductInvocableActionTest.testGenerateAditionalInformation: line 14, column 1                        
 
 
 
@@ -9,14 +10,14 @@ AccountPhoneChangeTriggerTest.testPhoneChangeInsert  Pass              849
 === Test Summary
 NAME                 VALUE                    
 ───────────────────  ─────────────────────────
-Outcome              Passed                   
+Outcome              Failed                   
 Tests Ran            1                        
-Pass Rate            100%                     
-Fail Rate            0%                       
+Pass Rate            0%                       
+Fail Rate            100%                     
 Skip Rate            0%                       
-Test Run Id          707gK000007p0qG          
+Test Run Id          707gK000008uCRx          
 Test Setup Time      0 ms                     
-Test Execution Time  849 ms                   
-Test Total Time      849 ms                   
+Test Execution Time  57 ms                    
+Test Total Time      57 ms                    
 Org Id               00DgK000001suJEUAY       
 Username             dany338919@agentforce.com
