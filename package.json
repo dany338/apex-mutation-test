@@ -13,11 +13,14 @@
     "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
     "postinstall": "husky init",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "mutation:basic": "node scripts/ai-agent/runMutationTests.js",
+    "mutation:advanced": "node scripts/ai-agent/runMutationTests.js advanced-mutation-cases.yaml",
+    "mutation:all": "node scripts/ai-agent/runAllMutations.js"
   },
   "devDependencies": {
-    "@lwc/eslint-plugin-lwc": "^2.2.0",
     "@lwc/engine-dom": "^8.18.0",
+    "@lwc/eslint-plugin-lwc": "^2.2.0",
     "@lwc/jest-preset": "^19.1.0",
     "@prettier/plugin-xml": "^3.4.1",
     "@salesforce/eslint-config-lwc": "^3.7.2",
@@ -40,5 +43,9 @@
     "**/{aura,lwc}/**/*.js": [
       "eslint"
     ]
+  },
+  "dependencies": {
+    "dayjs": "^1.11.18",
+    "js-yaml": "^4.1.0"
   }
 }

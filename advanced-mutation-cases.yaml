@@ -1,0 +1,113 @@
+# Advanced Mutation Test Cases for Apex Types
+# Casos avanzados de prueba de mutación para diferentes patrones Apex
+
+---
+# Mutation 10: Batch Apex Pattern (if exists)
+className: BatchExample
+type: batch
+description: "Mutate batch size to test batch processing"
+originalCode: "Database.QueryLocator start(Database.BatchableContext bc) {"
+mutatedCode: "Database.QueryLocator start(Database.BatchableContext bc) { return null; //"
+expectedImpact:
+  - testBatchStart
+reason: "Returns null instead of proper QueryLocator to test error handling"
+
+---
+# Mutation 11: Flow Invoker Pattern
+className: FlowInvoker
+type: invocable
+description: "Break flow execution to test error handling"
+originalCode: "Flow.Interview.Tarea_creada_por_Flow flowInstance = new Flow.Interview.Tarea_creada_por_Flow(inputs);"
+mutatedCode: "Flow.Interview.Tarea_creada_por_Flow flowInstance = null; // new Flow.Interview.Tarea_creada_por_Flow(inputs);"
+expectedImpact:
+  - testFlowInvocadoConAccount
+reason: "Prevents flow creation to test error handling in flow invocation"
+
+---
+# Mutation 12: Exception Handling Pattern
+className: PaisCallout
+type: callout
+description: "Remove try-catch to test exception propagation"
+originalCode: "try {"
+mutatedCode: "if (false) { // try {"
+expectedImpact:
+  - testLlamadaAPais
+reason: "Removes exception handling to test if tests verify proper error handling"
+
+---
+# Mutation 13: SOQL Injection Prevention
+className: ContactValidator
+type: standard
+description: "Test SOQL injection vulnerability"
+originalCode: "SELECT Id, Email FROM Contact WHERE Email IN :emails"
+mutatedCode: "SELECT Id, Email FROM Contact"
+expectedImpact:
+  - testEvitarDuplicadosPorEmail
+reason: "Removes parameterized query to test SOQL practices awareness"
+
+---
+# Mutation 14: Governor Limits Pattern
+className: ContactValidator
+type: standard
+description: "Remove bulk operation optimization"
+originalCode: "if (!emails.isEmpty()) {"
+mutatedCode: "if (true) { // Always execute query"
+expectedImpact:
+  - testEvitarDuplicadosPorEmailConNull
+reason: "Forces query execution even with empty collection to test governor limits awareness"
+
+---
+# Mutation 15: Null Pointer Exception Pattern
+className: ProductInvocableAction
+type: invocable
+description: "Introduce potential null pointer exception"
+originalCode: "outputContextData.nodeData.put(Constants.STRING_ID, idRecord);"
+mutatedCode: "outputContextData.nodeData.put(Constants.STRING_ID, idRecord.toString());"
+expectedImpact:
+  - testGenerateAditionalInformation
+reason: "Calls toString() on potentially null idRecord to test null handling"
+
+---
+# Mutation 16: Data Type Conversion Issues
+className: DiscountCalculator
+type: standard
+description: "Test integer division instead of decimal"
+originalCode: "return totalAmount * 0.1;"
+mutatedCode: "return totalAmount * 1 / 10;"
+expectedImpact:
+  - testDiscountOverThreshold
+  - testDiscountExactlyThreshold
+reason: "Changes decimal multiplication to integer division which may cause precision loss"
+
+---
+# Mutation 17: Loop Logic Error
+className: ContactValidator
+type: standard
+description: "Break out of loop early to test iteration completeness"
+originalCode: "for (Contact c : nuevosContactos) {"
+mutatedCode: "for (Contact c : nuevosContactos) { if (c.Email == null) break;"
+expectedImpact:
+  - testEvitarDuplicadosPorEmailVariosContactos
+reason: "Breaks loop early when encountering null email, potentially missing validations"
+
+---
+# Mutation 18: Security Context Change
+className: ContactAccountHandler
+type: standard
+description: "Test sharing context by removing with sharing"
+originalCode: "public class ContactAccountHandler {"
+mutatedCode: "public without sharing class ContactAccountHandler {"
+expectedImpact:
+  - testAsociarContactoConCuenta
+reason: "Changes sharing context to test security implications"
+
+---
+# Mutation 19: Asynchronous Execution Error
+className: InsertarContactosQueueable
+type: queueable
+description: "Add infinite recursion to test async limits"
+originalCode: "System.debug('✅ Contactos insertados exitosamente: ' + contactos.size());"
+mutatedCode: "System.enqueueJob(new InsertarContactosQueueable(contactos)); System.debug('✅ Contactos insertados exitosamente: ' + contactos.size());"
+expectedImpact:
+  - testInsertarContactosQueueable
+reason: "Introduces recursive job queuing to test async governor limits awareness"

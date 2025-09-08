@@ -1,0 +1,164 @@
+{
+  "timestamp": "2025-09-08T14:55:52.001Z",
+  "totalMutations": 10,
+  "successfulMutations": 9,
+  "failedMutations": 1,
+  "mutations": [
+    {
+      "className": "FlowInvoker",
+      "type": "invocable",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/FlowInvoker__mutated_1757343351999.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/FlowInvoker.cls",
+      "description": "Break flow execution to test error handling",
+      "expectedImpact": [
+        "testFlowInvocadoConAccount"
+      ],
+      "originalCode": "Flow.Interview.Tarea_creada_por_Flow flowInstance = new Flow.Interview.Tarea_creada_por_Flow(inputs);",
+      "mutatedCode": "Flow.Interview.Tarea_creada_por_Flow flowInstance = null; // new Flow.Interview.Tarea_creada_por_Flow(inputs);",
+      "reason": "Prevents flow creation to test error handling in flow invocation",
+      "timestamp": 1757343351999
+    },
+    {
+      "className": "PaisCallout",
+      "type": "callout",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/PaisCallout__mutated_1757343351999.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/PaisCallout.cls",
+      "description": "Remove try-catch to test exception propagation",
+      "expectedImpact": [
+        "testLlamadaAPais"
+      ],
+      "originalCode": "try {",
+      "mutatedCode": "if (false) { // try {",
+      "reason": "Removes exception handling to test if tests verify proper error handling",
+      "timestamp": 1757343351999
+    },
+    {
+      "className": "ContactValidator",
+      "type": "standard",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/ContactValidator__mutated_1757343352000.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/ContactValidator.cls",
+      "description": "Test SOQL injection vulnerability",
+      "expectedImpact": [
+        "testEvitarDuplicadosPorEmail"
+      ],
+      "originalCode": "SELECT Id, Email FROM Contact WHERE Email IN :emails",
+      "mutatedCode": "SELECT Id, Email FROM Contact",
+      "reason": "Removes parameterized query to test SOQL practices awareness",
+      "timestamp": 1757343352000
+    },
+    {
+      "className": "ContactValidator",
+      "type": "standard",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/ContactValidator__mutated_1757343352000.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/ContactValidator.cls",
+      "description": "Remove bulk operation optimization",
+      "expectedImpact": [
+        "testEvitarDuplicadosPorEmailConNull"
+      ],
+      "originalCode": "if (!emails.isEmpty()) {",
+      "mutatedCode": "if (true) { // Always execute query",
+      "reason": "Forces query execution even with empty collection to test governor limits awareness",
+      "timestamp": 1757343352000
+    },
+    {
+      "className": "ProductInvocableAction",
+      "type": "invocable",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/ProductInvocableAction__mutated_1757343352001.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/ProductInvocableAction.cls",
+      "description": "Introduce potential null pointer exception",
+      "expectedImpact": [
+        "testGenerateAditionalInformation"
+      ],
+      "originalCode": "outputContextData.nodeData.put(Constants.STRING_ID, idRecord);",
+      "mutatedCode": "outputContextData.nodeData.put(Constants.STRING_ID, idRecord.toString());",
+      "reason": "Calls toString() on potentially null idRecord to test null handling",
+      "timestamp": 1757343352001
+    },
+    {
+      "className": "DiscountCalculator",
+      "type": "standard",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/DiscountCalculator__mutated_1757343352001.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/DiscountCalculator.cls",
+      "description": "Test integer division instead of decimal",
+      "expectedImpact": [
+        "testDiscountOverThreshold",
+        "testDiscountExactlyThreshold"
+      ],
+      "originalCode": "return totalAmount * 0.1;",
+      "mutatedCode": "return totalAmount * 1 / 10;",
+      "reason": "Changes decimal multiplication to integer division which may cause precision loss",
+      "timestamp": 1757343352001
+    },
+    {
+      "className": "ContactValidator",
+      "type": "standard",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/ContactValidator__mutated_1757343352001.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/ContactValidator.cls",
+      "description": "Break out of loop early to test iteration completeness",
+      "expectedImpact": [
+        "testEvitarDuplicadosPorEmailVariosContactos"
+      ],
+      "originalCode": "for (Contact c : nuevosContactos) {",
+      "mutatedCode": "for (Contact c : nuevosContactos) { if (c.Email == null) break;",
+      "reason": "Breaks loop early when encountering null email, potentially missing validations",
+      "timestamp": 1757343352001
+    },
+    {
+      "className": "ContactAccountHandler",
+      "type": "standard",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/ContactAccountHandler__mutated_1757343352001.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/ContactAccountHandler.cls",
+      "description": "Test sharing context by removing with sharing",
+      "expectedImpact": [
+        "testAsociarContactoConCuenta"
+      ],
+      "originalCode": "public class ContactAccountHandler {",
+      "mutatedCode": "public without sharing class ContactAccountHandler {",
+      "reason": "Changes sharing context to test security implications",
+      "timestamp": 1757343352001
+    },
+    {
+      "className": "InsertarContactosQueueable",
+      "type": "queueable",
+      "outputFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/mutations/2025-09-08/advanced/InsertarContactosQueueable__mutated_1757343352001.cls",
+      "originalFile": "/home/runner/work/apex-mutation-test/apex-mutation-test/force-app/main/default/classes/InsertarContactosQueueable.cls",
+      "description": "Add infinite recursion to test async limits",
+      "expectedImpact": [
+        "testInsertarContactosQueueable"
+      ],
+      "originalCode": "System.debug('✅ Contactos insertados exitosamente: ' + contactos.size());",
+      "mutatedCode": "System.enqueueJob(new InsertarContactosQueueable(contactos)); System.debug('✅ Contactos insertados exitosamente: ' + contactos.size());",
+      "reason": "Introduces recursive job queuing to test async governor limits awareness",
+      "timestamp": 1757343352001
+    }
+  ],
+  "summary": {
+    "types": [
+      "invocable",
+      "callout",
+      "standard",
+      "queueable"
+    ],
+    "classes": [
+      "FlowInvoker",
+      "PaisCallout",
+      "ContactValidator",
+      "ProductInvocableAction",
+      "DiscountCalculator",
+      "ContactAccountHandler",
+      "InsertarContactosQueueable"
+    ],
+    "expectedFailingTests": [
+      "testFlowInvocadoConAccount",
+      "testLlamadaAPais",
+      "testEvitarDuplicadosPorEmail",
+      "testEvitarDuplicadosPorEmailConNull",
+      "testGenerateAditionalInformation",
+      "testDiscountOverThreshold",
+      "testDiscountExactlyThreshold",
+      "testEvitarDuplicadosPorEmailVariosContactos",
+      "testAsociarContactoConCuenta",
+      "testInsertarContactosQueueable"
+    ]
+  }
+}
