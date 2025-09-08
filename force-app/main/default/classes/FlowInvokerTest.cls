@@ -1,6 +1,6 @@
 @isTest
 public class FlowInvokerTest {
-    static void testFlowInvocadoConAccount() {
+    @isTest static void testFlowInvocadoConAccount() {
         // Crear cuenta de prueba
         Account cuenta = new Account(Name = 'Cuenta Test');
         insert cuenta;

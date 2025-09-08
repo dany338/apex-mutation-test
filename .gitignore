@@ -43,3 +43,7 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+
+# Mutation Testing Generated Files
+mutations/
+**/mutation-report.json

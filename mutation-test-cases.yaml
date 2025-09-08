@@ -1,0 +1,102 @@
+# Mutation Test Cases for Apex Types
+# Casos de prueba de mutación para validar la efectividad de los tests
+
+---
+# Mutation 1: Standard Class - DiscountCalculator
+className: DiscountCalculator
+type: standard
+description: "Mutate threshold comparison to test boundary conditions"
+originalCode: "if (totalAmount >= 1000) {"
+mutatedCode: "if (totalAmount > 1000) {"
+expectedImpact:
+  - testDiscountExactlyThreshold
+reason: "Changes >= to > which should make the test fail for exactly 1000"
+
+---
+# Mutation 2: Standard Class - DiscountCalculator 
+className: DiscountCalculator
+type: standard
+description: "Mutate discount percentage to test calculation logic"
+originalCode: "return totalAmount * 0.1;"
+mutatedCode: "return totalAmount * 0.05;"
+expectedImpact:
+  - testDiscountOverThreshold
+  - testDiscountExactlyThreshold
+reason: "Changes discount from 10% to 5% which should make calculations fail"
+
+---
+# Mutation 3: Standard Class - ContactValidator
+className: ContactValidator
+type: standard
+description: "Remove null check to test validation logic"
+originalCode: "if (c.Email != null) {"
+mutatedCode: "if (true) {"
+expectedImpact:
+  - testEvitarDuplicadosPorEmailConNull
+reason: "Removes null check which could cause NullPointerException"
+
+---
+# Mutation 4: Standard Class - ContactValidator
+className: ContactValidator
+type: standard  
+description: "Change containsKey check to test duplicate detection"
+originalCode: "if (nuevo.Email != null && contactosExistentes.containsKey(nuevo.Email.toLowerCase())) {"
+mutatedCode: "if (nuevo.Email != null && !contactosExistentes.containsKey(nuevo.Email.toLowerCase())) {"
+expectedImpact:
+  - testEvitarDuplicadosPorEmail
+reason: "Inverts containsKey logic which should prevent error from being added"
+
+---
+# Mutation 5: Invocable Class - ProductInvocableAction
+className: ProductInvocableAction
+type: invocable
+description: "Change variable assignment to test data flow"
+originalCode: "idRecord = null; // 📝 Description: Set `idRecord` to `null` to simulate a failure in handling input data. - 💥 Expected impact: `testGenerateAditionalInformation` should fail because the assertion checking the value of `info.nodeData.get(Constants.STRING_ID)` will not match the expected ID."
+mutatedCode: "idRecord = input.varIdRecord;"
+expectedImpact:
+  - testGenerateAditionalInformation
+reason: "Restores proper idRecord assignment which should make test pass (inverse mutation)"
+
+---
+# Mutation 6: Queueable Class - InsertarContactosQueueable
+className: InsertarContactosQueueable
+type: queueable
+description: "Remove DML operation to test execution logic"
+originalCode: "insert contactos;"
+mutatedCode: "// insert contactos; // Commented out"
+expectedImpact:
+  - testInsertarContactosQueueable
+reason: "Prevents actual insertion of contacts, should be caught by validation"
+
+---
+# Mutation 7: Callout Class - PaisCallout
+className: PaisCallout
+type: callout
+description: "Change HTTP method to test API integration"
+originalCode: "request.setMethod('GET');"
+mutatedCode: "request.setMethod('POST');"
+expectedImpact:
+  - testLlamadaAPais
+reason: "Changes HTTP method which might affect API response or cause errors"
+
+---
+# Mutation 8: Standard Class - ContactAccountHandler
+className: ContactAccountHandler
+type: standard
+description: "Remove null check to test association logic"
+originalCode: "if (c.Identificador_Externo__c != null) {"
+mutatedCode: "if (true) {"
+expectedImpact:
+  - testAsociarContactoConCuenta
+reason: "Removes null check which could cause issues with account association"
+
+---
+# Mutation 9: Standard Class - ContactAccountHandler
+className: ContactAccountHandler
+type: standard
+description: "Change map key access to test data mapping"
+originalCode: "c.AccountId = cuentasMap.get(c.Identificador_Externo__c).Id;"
+mutatedCode: "c.AccountId = null;"
+expectedImpact:
+  - testAsociarContactoConCuenta
+reason: "Sets AccountId to null instead of mapped value, breaking association"
