@@ -1,8 +1,8 @@
 === Test Results
-TEST NAME                                                    OUTCOME  MESSAGE                                                                                         RUNTIME (MS)
-───────────────────────────────────────────────────────────  ───────  ──────────────────────────────────────────────────────────────────────────────────────────────  ────────────
-ProductInvocableActionTest.testGenerateAditionalInformation  Fail     System.AssertException: Assertion Failed: Debe haber un solo resultado: Expected: 1, Actual: 0  
-                                                                      Class.ProductInvocableActionTest.testGenerateAditionalInformation: line 14, column 1                        
+TEST NAME                                                    OUTCOME  MESSAGE                                                                               RUNTIME (MS)
+───────────────────────────────────────────────────────────  ───────  ────────────────────────────────────────────────────────────────────────────────────  ────────────
+ProductInvocableActionTest.testGenerateAditionalInformation  Fail     System.AssertException: Assertion Failed: Expected: 001XXXXXXXXXXXXXXX, Actual: null  
+                                                                      Class.ProductInvocableActionTest.testGenerateAditionalInformation: line 19, column 1              
 
 
 
@@ -15,9 +15,9 @@ Tests Ran            1
 Pass Rate            0%                       
 Fail Rate            100%                     
 Skip Rate            0%                       
-Test Run Id          707gK000008wfW4          
+Test Run Id          707gK00000A1HVm          
 Test Setup Time      0 ms                     
-Test Execution Time  31 ms                    
-Test Total Time      31 ms                    
+Test Execution Time  30 ms                    
+Test Total Time      30 ms                    
 Org Id               00DgK000001suJEUAY       
 Username             dany338919@agentforce.com

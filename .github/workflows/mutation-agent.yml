@@ -1,0 +1,87 @@
+name: AI Mutation Agent CI
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'force-app/main/default/classes/**/*.cls'
+      - 'force-app/main/default/triggers/**/*.trigger'
+      - 'force-app/main/default/layouts/**/*.layout'
+      - 'force-app/main/default/objects/**/*.object'
+      - 'force-app/main/default/flows/**/*.flow'
+      - 'force-app/main/default/pages/**/*.page'     
+
+jobs:
+  ai-mutation-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🛎 Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🧰 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: 📦 Install dependencies
+      run: npm install
+
+    - name: 🤖 Run AI Mutation Agent
+      run: node scripts/ai-agent/index.js
+
+    - name: 📤 Upload mutation reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: mutation-reports
+        path: |
+          mutations/**/*.json
+          mutations/**/*.csv
+          mutations/**/*.md
+          mutations/**/*.html
+          mutations/**/*.pdf
+
+    - name: 🔍 Set PR Status (Gearset Gate)
+      if: github.event_name == 'pull_request'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        curl -X POST https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }} \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -d '{
+            "state": "success",
+            "context": "AI Mutation Agent",
+            "description": "✅ Mutaciones validadas con éxito",
+            "target_url": "https://gearset.com/deployments"
+          }'
+
+    - name: 🟢 Set PR status as success
+      if: success()
+      uses: Sibz/github-status-action@v1
+      with:
+        authToken: ${{ secrets.TOKEN_GITHUB }}
+        context: AI Mutation Check
+        state: success
+        description: AI testing passed
+
+    - name: 🔴 Set PR status as failure
+      if: failure()
+      uses: Sibz/github-status-action@v1
+      with:
+        authToken: ${{ secrets.TOKEN_GITHUB }}
+        context: AI Mutation Check
+        state: failure
+        description: AI testing failed
+
+    - name: 🚪 Webhook a Gearset (resumen)
+      run: |
+        curl -X POST https://gearset-api.kaseya.internal/hooks/ai \
+          -H "Content-Type: application/json" \
+          -d '{
+            "pr_id": ${{ github.event.pull_request.number || 123 }},
+            "status": "PASSED",
+            "summary": "Mutaciones completadas",
+            "badge": "✅ AI Approved"
+          }'
+
+

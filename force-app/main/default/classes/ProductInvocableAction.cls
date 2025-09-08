@@ -28,7 +28,7 @@ public with sharing class ProductInvocableAction {
 
         for(inputVar input : inputs) {
             apiVar = input.productName;
-            idRecord = input.varIdRecord;
+            idRecord = null; // 📝 Description: Set `idRecord` to `null` to simulate a failure in handling input data. - 💥 Expected impact: `testGenerateAditionalInformation` should fail because the assertion checking the value of `info.nodeData.get(Constants.STRING_ID)` will not match the expected ID.
         }
 
         List<DummyContextDataInput> resultData = new List<DummyContextDataInput>();
